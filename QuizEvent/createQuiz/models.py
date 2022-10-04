@@ -61,7 +61,6 @@ class QuizResult(models.Model):
     quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     nickname = models.ForeignKey(Student, on_delete=models.CASCADE)
     studentscore = models.IntegerField(default=0, null=False)
-    cAns1 = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=False,  related_name="cAns1")
 
 
 
