@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+</head>
+<body>
+    Quiz Result
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+    <input type="submit" value="View Results">
+
+    <table border="1" cellspacing="2">
+        <tr>
+            <th>Username</th>
+            <th>Subject Name</th>
+            <th>Correct Answer</th>
+            <th>Student Answer</th>
+            <th>Score</th>
+        </tr>
+
+        <tr>
+            <th>Subj 1</th>
+            <th>Correct Ans1</th>
+            <th>Studn Ans</th>
+            <th>Date of Event</th>
+            <th>25</th>
+        </tr>
+
+    </table>
+</body>
+</html>
