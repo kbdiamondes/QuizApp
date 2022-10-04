@@ -6,6 +6,10 @@
 </head>
 <body>
     Quiz Result
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+    <input type="submit" value="View Results">
 
     <table border="1" cellspacing="2">
         <tr>
