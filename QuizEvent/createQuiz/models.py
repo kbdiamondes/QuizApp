@@ -13,48 +13,38 @@ class User(models.Model):
     lastname = models.CharField(max_length=50, null=False)
     type = models.CharField(max_length=1, choices=type_user)
 
+    def __str__(self):
+        return self.username + ' ' + self.firstname + ' ' + self.lastname + ' ' + self.type
+
 
 class Student(User):
-    nickname = models.CharField(max_length=15)
-    course = models.CharField(max_length=50)
+    course = models.CharField(max_length=50, null=False)
 
 
 
 class Teacher(User):
-    degree = models.CharField(max_length=50)
+    degree = models.CharField(max_length=50, null=False)
 
 
 class Quiz(models.Model):
     quizid = models.AutoField(primary_key=True)
     subjectname = models.CharField(max_length=50)
-    username = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    question1 = models.CharField(max_length=50)
-    question2 = models.CharField(max_length=50)
-    question3 = models.CharField(max_length=50)
-    question4 = models.CharField(max_length=50)
-    question5 = models.CharField(max_length=50)
-    correctanswer1 = models.CharField(max_length=50)
-    correctanswer2 = models.CharField(max_length=50)
-    correctanswer3 = models.CharField(max_length=50)
-    correctanswer4 = models.CharField(max_length=50)
-    correctanswer5 = models.CharField(max_length=50)
-    eqpoints1 = models.CharField(max_length=50)
-    eqpoints2 = models.CharField(max_length=50)
-    eqpoints3 = models.CharField(max_length=50)
-    eqpoints4 = models.CharField(max_length=50)
-    eqpoints5 = models.CharField(max_length=50)
+    question = models.CharField(max_length=50)
+    correctanswer = models.CharField(max_length=50)
+    eqpoints = models.CharField(max_length=50)
+
+    def __str__(self):
+        return str(self.quizid) + ' ' + self.subjectname
+
+
+class QuizBank(models.Model):
+    quizid= models.ForeignKey(Quiz, on_delete=models.CASCADE, primary_key=True)
 
 
 class StudentAnswer(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.ForeignKey(Student, on_delete=models.CASCADE)
+    username = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True)
     quizid = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    studentanswer1 = models.CharField(max_length=50)
-    studentanswer2 = models.CharField(max_length=50)
-    studentanswer3 = models.CharField(max_length=50)
-    studentanswer4 = models.CharField(max_length=50)
-    studentanswer5 = models.CharField(max_length=50)
-
+    studentanswer = models.CharField(max_length=50)
 
 
 class QuizResult(models.Model):

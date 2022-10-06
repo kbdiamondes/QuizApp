@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Registration</title>
+</head>
+<body>
+<h1>Teacher registration Page</h1>
+  <form action="" method="post">
+      {%csrf_token%}
+      {{form.as_p}}
+      <a href="{% url 'createQuiz:login' %}">Sign in</a>
+      <input type="submit" value="Create">
+  </form>
+</body>
+</html>

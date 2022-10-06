@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quiz</title>
+</head>
+<body>
+<h3>Quiz Creation</h3>
+    <form action="" method="post">
+        <a href=" {% url 'createQuiz:main_menu' %} "> Menu</a>
+        <a href=" {% url 'createQuiz:quiz_bank' %} "> Import Question</a>
+        {% csrf_token %}
+        {{form.as_p}}
+    <input type="submit" value="Add Question">
+    <input type="submit" value = "Done">
+
+
+    </form>
+
+</body>
+</html>

@@ -5,11 +5,14 @@
     <title>Quiz Answer</title>
 </head>
 <body>
-    Quiz Answer
+
+<h3><br>Username{{request.session.username}}</br></h3>
+<a href=" {% url 'createQuiz:main_menu' %} "> Menu</a>
     <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
-    <input type="submit" value="Create Quiz">
+    <input type="submit" value="Submit Answer">
+
     </form>
 </body>
 </html>
