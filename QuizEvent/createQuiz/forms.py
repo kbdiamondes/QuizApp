@@ -39,6 +39,7 @@ class TeacherRegistration(ModelForm):
         fields = ['username', 'password', 'firstname', 'middlename', 'lastname', 'degree']
 
 class CreateQuizForm(ModelForm):
+    quizid = forms.IntegerField(widget = forms.TextInput())
     subjectname = forms.CharField(widget=forms.TextInput())
     question = forms.CharField(widget=forms.TextInput())
     correctanswer = forms.CharField(widget=forms.TextInput())
@@ -47,7 +48,7 @@ class CreateQuizForm(ModelForm):
 
     class Meta:
         model = Quiz
-        fields = ['subjectname', 'question',  'correctanswer', 'eqpoints']
+        fields = ['quizid','subjectname', 'question',  'correctanswer', 'eqpoints']
 
 
 class StudentAnswerForm(ModelForm):
@@ -69,13 +70,13 @@ class QuizResultForm(ModelForm):
 
 
 class QuizBankForm(ModelForm):
-    quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.all())
+    questionid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('questionid'))
     #subjectname = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only())
 
     def __init__(self, *args, **kwargs):
         super(QuizBankForm, self).__init__(*args, *kwargs)
     class Meta:
         model = Quiz
-        fields = ['quizid']
+        fields = ['questionid']
 
 

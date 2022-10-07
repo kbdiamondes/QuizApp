@@ -30,7 +30,7 @@ class RegisterStudent(View):
 
 
 class RegisterTeacher(View):
-    template = 'student-registration.html'
+    template = 'teacher-registration.html'
 
     def get(self, request):
         form = TeacherRegistration()

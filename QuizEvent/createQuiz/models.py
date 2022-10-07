@@ -27,18 +27,19 @@ class Teacher(User):
 
 
 class Quiz(models.Model):
-    quizid = models.AutoField(primary_key=True)
+    questionid = models.AutoField(primary_key = True, null = False)
+    quizid = models.IntegerField(null = False)
     subjectname = models.CharField(max_length=50)
     question = models.CharField(max_length=50)
     correctanswer = models.CharField(max_length=50)
     eqpoints = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(self.quizid) + ' ' + self.subjectname
+        return str(self.questionid) + ' ' + 'Quiz ID:' + str(self.quizid) + '  ' + 'Subject Name: ' + self.subjectname + '  ' + 'Question: ' + self.question
 
 
 class QuizBank(models.Model):
-    quizid= models.ForeignKey(Quiz, on_delete=models.CASCADE, primary_key=True)
+    questionid= models.ForeignKey(Quiz, on_delete=models.CASCADE, primary_key=True)
 
 
 class StudentAnswer(models.Model):

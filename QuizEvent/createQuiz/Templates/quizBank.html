@@ -9,6 +9,7 @@
     <form>
         {% csrf_token %}
         {{form.as_p}}
+
     <input type = "submit" value = "Add Question">
     <a href=" {% url 'createQuiz:add_quiz' %} ">Back</a>
     </form>
