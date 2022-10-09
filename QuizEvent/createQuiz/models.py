@@ -43,7 +43,7 @@ class QuizBank(models.Model):
 
 
 class StudentAnswer(models.Model):
-    username = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True)
+    #username = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True)
     quizid = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     studentanswer = models.CharField(max_length=50)
 

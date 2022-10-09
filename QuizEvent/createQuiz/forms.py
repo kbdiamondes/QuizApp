@@ -52,7 +52,6 @@ class CreateQuizForm(ModelForm):
 
 
 class StudentAnswerForm(ModelForm):
-
     studentanswer = forms.CharField(widget=forms.TextInput())
     quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
 
