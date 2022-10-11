@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h3><br>Username{{request.session.username}}</br></h3>
+<h3><br>Username: {{request.session.username}}</br></h3>
 <a href=" {% url 'createQuiz:main_menu' %} "> Menu</a>
     <form action="" method="post">
         {% csrf_token %}

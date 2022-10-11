@@ -6,8 +6,8 @@
 </head>
 <body>
   <p>Quiz Portal Center</p>
-  Username{{request.session.username}} <br>
-  Type{{request.session.type}} <br>
+  Username:<strong>{{request.session.username}}</strong>  <br>
+  Type: <strong>{{request.session.type}} </strong><br>
 
   {% if request.session.username != '' and request.session.type == 'S'%}
     <a href="{% url 'createQuiz:ans_quiz' %}">Navigate Quiz</a>

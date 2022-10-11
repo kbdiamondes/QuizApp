@@ -1,3 +1,5 @@
+from django.template.defaulttags import url
+
 from . import views
 from django.urls import path
 
@@ -12,5 +14,6 @@ urlpatterns =[
     path('answerQuiz', views.AnswerQuiz.as_view(), name='ans_quiz'),
     path('quizResult', views.QuizResult.as_view(), name='quiz_result'),
     path('addFromQuizBank', views.QuizBank.as_view(), name='quiz_bank'),
+
 
 ]

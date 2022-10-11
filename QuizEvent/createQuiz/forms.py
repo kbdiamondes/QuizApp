@@ -43,7 +43,7 @@ class CreateQuizForm(ModelForm):
     subjectname = forms.CharField(widget=forms.TextInput())
     question = forms.CharField(widget=forms.TextInput())
     correctanswer = forms.CharField(widget=forms.TextInput())
-    eqpoints = forms.CharField(widget=forms.TextInput())
+    eqpoints = forms.IntegerField(widget=forms.TextInput())
 
 
     class Meta:
@@ -52,12 +52,13 @@ class CreateQuizForm(ModelForm):
 
 
 class StudentAnswerForm(ModelForm):
+    questionid = forms.ModelChoiceField(widget=forms.TextInput(), queryset=Quiz.objects.only('questionid'))
     studentanswer = forms.CharField(widget=forms.TextInput())
     quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
 
     class Meta:
         model = StudentAnswer
-        fields = ['quizid','studentanswer']
+        fields = ['quizid','questionid', 'studentanswer']
 
 
 class QuizResultForm(ModelForm):
@@ -69,13 +70,15 @@ class QuizResultForm(ModelForm):
 
 
 class QuizBankForm(ModelForm):
-    questionid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('questionid'))
+    #quizid = forms.IntegerField(widget=forms.TextInput())
+    quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
     #subjectname = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only())
+    questionid = forms.IntegerField(widget=forms.TextInput())
 
     def __init__(self, *args, **kwargs):
         super(QuizBankForm, self).__init__(*args, *kwargs)
     class Meta:
         model = Quiz
-        fields = ['questionid']
+        fields = ['quizid','questionid']
 
 

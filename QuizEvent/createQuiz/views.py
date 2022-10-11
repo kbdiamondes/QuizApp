@@ -75,8 +75,14 @@ class CreateQuiz(View):
 
     def post(self, request):
         form = CreateQuizForm(request.POST)
+
         if form.is_valid():
+            #quiz = Quiz.objects.get(pk=request.POST['quizid'])
+            #quizid = form.save(commit=False)
+            #quizid.quizid = quiz
+            #quiz.save()
             form.save()
+
         return render(request, self.template, {'form':form})
 
 
@@ -110,11 +116,9 @@ class QuizBank(View):
         return render(request, self.template, {'form':form})
 
     def post(self, request):
+        #form = QuizBankForm(request.POST)
+        #quizid = Quiz.objects.get(pk=request.POST['quizid'])
         form = QuizBankForm(request.POST)
         if form.is_valid():
-            #quizid = Quiz.objects.get(pk=request.POST['quizid'])
-            #quiz = form.save(commit=False)
-            #quiz.quizid = quizid
-            #quiz.save()
             form.save()
         return render(request, self.template, {'form':form})
