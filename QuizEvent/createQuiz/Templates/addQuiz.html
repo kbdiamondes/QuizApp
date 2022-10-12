@@ -6,14 +6,16 @@
 </head>
 <body>
 <h3>Quiz Creation</h3>
+    Session Counter: {{request.session.visits}} <br>
+    Hi <strong>{{request.session.username}}</strong>!<br>
     Type: <strong>{{request.session.type}} </strong><br>
     <form action="" method="post">
         <a href=" {% url 'createQuiz:main_menu' %} "> Menu</a>
         <a href=" {% url 'createQuiz:quiz_bank' %} "> Import Question</a>
+        <a href="{% url 'createQuiz:close_quiz' %}">Finish</a>
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="Add Question">
-        <input type="submit" value = "Finish">
 
 
 

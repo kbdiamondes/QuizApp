@@ -39,20 +39,21 @@ class TeacherRegistration(ModelForm):
         fields = ['username', 'password', 'firstname', 'middlename', 'lastname', 'degree']
 
 class CreateQuizForm(ModelForm):
-    quizid = forms.IntegerField(widget = forms.TextInput())
     subjectname = forms.CharField(widget=forms.TextInput())
     question = forms.CharField(widget=forms.TextInput())
+    questionid = forms.IntegerField(widget=forms.NumberInput())
     correctanswer = forms.CharField(widget=forms.TextInput())
     eqpoints = forms.IntegerField(widget=forms.TextInput())
 
 
     class Meta:
         model = Quiz
-        fields = ['quizid','subjectname', 'question',  'correctanswer', 'eqpoints']
+        fields = ['subjectname', 'questionid','question',  'correctanswer', 'eqpoints']
 
 
 class StudentAnswerForm(ModelForm):
-    questionid = forms.ModelChoiceField(widget=forms.TextInput(), queryset=Quiz.objects.only('questionid'))
+    #diplay table on studentanswerform
+    questionid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('questionid'))
     studentanswer = forms.CharField(widget=forms.TextInput())
     quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
 

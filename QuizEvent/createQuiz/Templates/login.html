@@ -5,6 +5,7 @@
     <title>Sign in Page</title>
 </head>
 <body>
+    Session Counter: {{request.session.visits}}
         <form method="post">
             {% csrf_token %}
             <pre>

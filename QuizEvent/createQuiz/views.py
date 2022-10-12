@@ -1,6 +1,10 @@
+from multiprocessing import connection
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
+from django.contrib.auth import logout as auth_logout
+
 
 from .forms import CreateQuizForm, StudentAnswerForm, QuizResultForm, QuizBankForm, StudentRegistration, \
     TeacherRegistration
@@ -48,6 +52,7 @@ class Login(View):
     template = 'login.html'
 
     def get(self, request):
+        request.session['visits'] = int(request.session.get('visits', 0)) + 1
         return render(request, self.template)
 
     def post(self, request):
@@ -71,18 +76,15 @@ class CreateQuiz(View):
 
     def get(self, request):
         form = CreateQuizForm()
+        request.session['visits'] = int(request.session.get('visits', 0)) + 1
         return render(request, self.template, {'form':form})
+
 
     def post(self, request):
         form = CreateQuizForm(request.POST)
 
         if form.is_valid():
-            #quiz = Quiz.objects.get(pk=request.POST['quizid'])
-            #quizid = form.save(commit=False)
-            #quizid.quizid = quiz
-            #quiz.save()
             form.save()
-
         return render(request, self.template, {'form':form})
 
 
@@ -91,7 +93,9 @@ class AnswerQuiz(View):
 
     def get(self, request):
         form = StudentAnswerForm()
-        return render(request, self.template, {'form':form})
+        request.session['visits'] = int(request.session.get('visits', 0)) + 1
+        quiz = Quiz.objects.all() #get data from all objects on Quiz model
+        return render(request, self.template,{'quiz':quiz, 'form':form})
 
     def post(self,request):
         form = StudentAnswerForm(request.POST)
@@ -113,7 +117,8 @@ class QuizBank(View):
 
     def get(self, request):
         form = QuizBankForm
-        return render(request, self.template, {'form':form})
+        quiz = Quiz.objects.all()
+        return render(request, self.template, {'quiz':quiz,'form':form})
 
     def post(self, request):
         #form = QuizBankForm(request.POST)
@@ -122,3 +127,23 @@ class QuizBank(View):
         if form.is_valid():
             form.save()
         return render(request, self.template, {'form':form})
+
+
+class LogOut(View):
+    template = 'logout.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
+    def logout(request):
+        auth_logout(request)
+        return redirect('login')
+
+class CloseQuiz(View): #closes the quiz session (BUGGED)
+    template = 'closeQuiz.html'
+
+    def get(self, request):
+        return render(request, self.template)
+    def logout(request):
+        auth_logout(request)
+        return redirect('login')

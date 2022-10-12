@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Logged Out</title>
+    <title>Quiz Form Saved</title>
 </head>
 <body>
     Session Counter: {{request.session.visits}}
-    <h3>You have successfully logged out!</h3>
-    <a href="{% url 'createQuiz:login' %}">Login</a>
+    <h3>Quiz Successfully saved!</h3>
+    <a href=" {% url 'createQuiz:main_menu' %} ">Menu</a>
 </body>
 </html>
