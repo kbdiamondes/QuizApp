@@ -133,17 +133,14 @@ class LogOut(View):
     template = 'logout.html'
 
     def get(self, request):
+        auth_logout(request)
         return render(request, self.template)
 
-    def logout(request):
-        auth_logout(request)
-        return redirect('login')
 
-class CloseQuiz(View): #closes the quiz session (BUGGED)
+
+class CloseQuiz(View):
     template = 'closeQuiz.html'
 
     def get(self, request):
-        return render(request, self.template)
-    def logout(request):
         auth_logout(request)
-        return redirect('login')
+        return render(request, self.template)
