@@ -79,10 +79,13 @@ class CreateQuiz(View):
         request.session['visits'] = int(request.session.get('visits', 0)) + 1
         return render(request, self.template, {'form':form})
 
+    def logout(self,request):
+        auth_logout(request)
+        return render(request, self.template)
+
 
     def post(self, request):
         form = CreateQuizForm(request.POST)
-
         if form.is_valid():
             form.save()
         return render(request, self.template, {'form':form})
