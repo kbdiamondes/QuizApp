@@ -1,6 +1,10 @@
+from multiprocessing import connection
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
+from django.contrib.auth import logout as auth_logout
+
 
 from .forms import CreateQuizForm, StudentAnswerForm, QuizResultForm, QuizBankForm, StudentRegistration, \
     TeacherRegistration
@@ -48,6 +52,7 @@ class Login(View):
     template = 'login.html'
 
     def get(self, request):
+        request.session['visits'] = int(request.session.get('visits', 0)) + 1
         return render(request, self.template)
 
     def post(self, request):
@@ -71,7 +76,13 @@ class CreateQuiz(View):
 
     def get(self, request):
         form = CreateQuizForm()
+        request.session['visits'] = int(request.session.get('visits', 0)) + 1
         return render(request, self.template, {'form':form})
+
+    def logout(self,request):
+        auth_logout(request)
+        return render(request, self.template)
+
 
     def post(self, request):
         form = CreateQuizForm(request.POST)
@@ -85,7 +96,9 @@ class AnswerQuiz(View):
 
     def get(self, request):
         form = StudentAnswerForm()
-        return render(request, self.template, {'form':form})
+        request.session['visits'] = int(request.session.get('visits', 0)) + 1
+        quiz = Quiz.objects.all() #get data from all objects on Quiz model
+        return render(request, self.template,{'quiz':quiz, 'form':form})
 
     def post(self,request):
         form = StudentAnswerForm(request.POST)
@@ -107,14 +120,30 @@ class QuizBank(View):
 
     def get(self, request):
         form = QuizBankForm
-        return render(request, self.template, {'form':form})
+        quiz = Quiz.objects.all()
+        return render(request, self.template, {'quiz':quiz,'form':form})
 
     def post(self, request):
+        #form = QuizBankForm(request.POST)
+        #quizid = Quiz.objects.get(pk=request.POST['quizid'])
         form = QuizBankForm(request.POST)
         if form.is_valid():
-            #quizid = Quiz.objects.get(pk=request.POST['quizid'])
-            #quiz = form.save(commit=False)
-            #quiz.quizid = quizid
-            #quiz.save()
             form.save()
         return render(request, self.template, {'form':form})
+
+
+class LogOut(View):
+    template = 'logout.html'
+
+    def get(self, request):
+        auth_logout(request)
+        return render(request, self.template)
+
+
+
+class CloseQuiz(View):
+    template = 'closeQuiz.html'
+
+    def get(self, request):
+        auth_logout(request)
+        return render(request, self.template)

@@ -4,13 +4,33 @@
     <meta charset="UTF-8">
     <title>Quiz Answer</title>
 </head>
-<body>
+<body style="background-color:grey;">
 
-<h3><br>Username{{request.session.username}}</br></h3>
+<h3><br>Username: {{request.session.username}}</br></h3>
+Session Counter: {{request.session.visits}} <br>
 <a href=" {% url 'createQuiz:main_menu' %} "> Menu</a>
+<a href="{% url 'createQuiz:logout' %}">Log Off</a>
     <form action="" method="post">
         {% csrf_token %}
-        {{form.as_p}}
+
+        <table cellspacing="2" border="1">
+            <th>Question ID</th>
+            <th>Quiz ID</th>
+            <th>Subject Name</th>
+            <th>Question</th>
+            <th>Points</th>
+        {% for e in quiz %}
+            <tr>
+                <td>{{e.questionid}}</td>
+                <td>{{e.quizid}}</td>
+                <td>{{e.subjectname}}</td>
+                <td>{{e.question}}</td>
+                <td>{{e.eqpoints}}</td>
+
+            </tr>
+        {% endfor %}
+        </table>
+                {{form.as_p}}
     <input type="submit" value="Submit Answer">
 
     </form>

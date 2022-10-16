@@ -27,24 +27,27 @@ class Teacher(User):
 
 
 class Quiz(models.Model):
-    questionid = models.AutoField(primary_key = True, null = False)
-    quizid = models.IntegerField(null = False)
+    questionid = models.IntegerField(null = False, unique=True)
+    quizid = models.AutoField(primary_key=True)
     subjectname = models.CharField(max_length=50)
     question = models.CharField(max_length=50)
     correctanswer = models.CharField(max_length=50)
-    eqpoints = models.CharField(max_length=50)
+    eqpoints = models.IntegerField()
 
     def __str__(self):
-        return str(self.questionid) + ' ' + 'Quiz ID:' + str(self.quizid) + '  ' + 'Subject Name: ' + self.subjectname + '  ' + 'Question: ' + self.question
+        #return 'Quiz ID:' + str(self.quizid) + ' ' + 'Question ID:' + ' ' + str(self.questionid)  + '  ' + 'Subject Name: ' + self.subjectname + '  ' + 'Question: ' + self.question
+        return 'Quiz ID:' + str(self.quizid) + ' ' + ' Question ID: ' + str(self.questionid)
 
 
 class QuizBank(models.Model):
-    questionid= models.ForeignKey(Quiz, on_delete=models.CASCADE, primary_key=True)
+    quizid= models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    questionid = models.IntegerField()
 
 
 class StudentAnswer(models.Model):
-    #username = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True)
-    quizid = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    #username = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='user_name')
+    questionid = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_question')
+    quizid = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_id', primary_key=True)
     studentanswer = models.CharField(max_length=50)
 
 

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Sign in Page</title>
 </head>
-<body>
+<body style="background-color:grey;">
+    Session Counter: {{request.session.visits}}
         <form method="post">
             {% csrf_token %}
             <pre>

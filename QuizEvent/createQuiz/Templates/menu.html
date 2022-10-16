@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <title>Welcome!</title>
 </head>
-<body>
+<body style="background-color:grey;">
   <p>Quiz Portal Center</p>
-  Username{{request.session.username}} <br>
-  Type{{request.session.type}} <br>
+  Session Counter: {{request.session.visits}}<br><br>
 
   {% if request.session.username != '' and request.session.type == 'S'%}
+    Username:<strong>{{request.session.username}}</strong>  <br>
+    Type: <strong>{{request.session.type}} </strong><br>
     <a href="{% url 'createQuiz:ans_quiz' %}">Navigate Quiz</a>
-    <a href="{% url 'createQuiz:login' %}">Log Off</a>
+    <a href="{% url 'createQuiz:logout' %}">Log Off</a>
   {%elif request.session.username != '' and request.session.type == 'T' %}
+    Username:<strong>{{request.session.username}}</strong>  <br>
+    Type: <strong>{{request.session.type}} </strong><br>
     <a href="{% url 'createQuiz:add_quiz' %}">Create New Quiz</a>
-    <a href="{% url 'createQuiz:login' %}">Log Off</a>
+    <a href="{% url 'createQuiz:logout' %}">Log Off</a>
   {% else %}
+    <h3>Invalid Access!</h3>
     <a href="{% url 'createQuiz:login' %}">Login</a>
-    <a href="{% url 'createQuiz:add_student' %}">CreateNew Student</a>
   {% endif %}
 
 </body>

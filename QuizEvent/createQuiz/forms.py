@@ -39,25 +39,29 @@ class TeacherRegistration(ModelForm):
         fields = ['username', 'password', 'firstname', 'middlename', 'lastname', 'degree']
 
 class CreateQuizForm(ModelForm):
-    quizid = forms.IntegerField(widget = forms.TextInput())
     subjectname = forms.CharField(widget=forms.TextInput())
     question = forms.CharField(widget=forms.TextInput())
+    questionid = forms.IntegerField(widget=forms.NumberInput())
     correctanswer = forms.CharField(widget=forms.TextInput())
-    eqpoints = forms.CharField(widget=forms.TextInput())
+    eqpoints = forms.IntegerField(widget=forms.NumberInput())
 
 
     class Meta:
         model = Quiz
-        fields = ['quizid','subjectname', 'question',  'correctanswer', 'eqpoints']
+        fields = ['subjectname', 'questionid','question',  'correctanswer', 'eqpoints']
 
 
 class StudentAnswerForm(ModelForm):
+    #diplay table on studentanswerform
+    #username = forms.CharField(widget=forms.TextInput())
+    questionid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('questionid'))
     studentanswer = forms.CharField(widget=forms.TextInput())
     quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
 
     class Meta:
         model = StudentAnswer
-        fields = ['quizid','studentanswer']
+        fields = ['quizid','questionid','studentanswer']
+        #fields = ['student_answer']
 
 
 class QuizResultForm(ModelForm):
@@ -69,13 +73,15 @@ class QuizResultForm(ModelForm):
 
 
 class QuizBankForm(ModelForm):
-    questionid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('questionid'))
+    #quizid = forms.IntegerField(widget=forms.TextInput())
+    quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
     #subjectname = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only())
+    questionid = forms.IntegerField(widget=forms.TextInput())
 
     def __init__(self, *args, **kwargs):
         super(QuizBankForm, self).__init__(*args, *kwargs)
     class Meta:
         model = Quiz
-        fields = ['questionid']
+        fields = ['quizid','questionid']
 
 

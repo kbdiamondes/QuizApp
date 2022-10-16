@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <title>Quiz Bank</title>
 </head>
-<body>
+<body style="background-color:grey;">
     Welcome to your Question Bank!
-    <form>
+    <form action="" method="post">
         {% csrf_token %}
-        {{form.as_p}}
+        <table cellspacing="2" border="1">
+            <th>Question ID</th>
+            <th>Quiz ID</th>
+            <th>Subject Name</th>
+            <th>Question</th>
+            <th>Correct Answer</th>
+            <th>Points</th>
+        {% for e in quiz %}
+            <tr>
+                <td>{{e.questionid}}</td>
+                <td>{{e.quizid}}</td>
+                <td>{{e.subjectname}}</td>
+                <td>{{e.question}}</td>
+                <td>{{e.correctanswer}}</td>
+                <td>{{e.eqpoints}}</td>
 
+            </tr>
+        {% endfor %}
+        </table>
+                {{form.as_p}}
     <input type = "submit" value = "Add Question">
     <a href=" {% url 'createQuiz:add_quiz' %} ">Back</a>
     </form>

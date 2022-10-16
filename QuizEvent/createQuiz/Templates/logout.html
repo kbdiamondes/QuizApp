@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged Out</title>
+</head>
+<body style="background-color:grey;">
+    Session Counter: {{request.session.visits}}
+    <h3>You have successfully logged out!</h3>
+    <a href="{% url 'createQuiz:login' %}">Login</a>
+</body>
+</html>
