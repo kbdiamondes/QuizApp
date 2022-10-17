@@ -52,16 +52,14 @@ class CreateQuizForm(ModelForm):
 
 
 class StudentAnswerForm(ModelForm):
-    #diplay table on studentanswerform
-    #username = forms.CharField(widget=forms.TextInput())
     questionid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('questionid'))
     studentanswer = forms.CharField(widget=forms.TextInput())
-    quizid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
+
 
     class Meta:
         model = StudentAnswer
-        fields = ['quizid','questionid','studentanswer']
-        #fields = ['student_answer']
+        fields = ['questionid','studentanswer']
+
 
 
 class QuizResultForm(ModelForm):

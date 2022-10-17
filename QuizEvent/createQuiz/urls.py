@@ -18,4 +18,5 @@ urlpatterns =[
     path('addFromQuizBank', views.QuizBank.as_view(), name='quiz_bank'),
 
 
+
 ]

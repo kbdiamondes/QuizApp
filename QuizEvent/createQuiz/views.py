@@ -1,5 +1,6 @@
 from multiprocessing import connection
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
@@ -8,7 +9,7 @@ from django.contrib.auth import logout as auth_logout
 
 from .forms import CreateQuizForm, StudentAnswerForm, QuizResultForm, QuizBankForm, StudentRegistration, \
     TeacherRegistration
-from .models import Quiz, User
+from .models import Quiz, User, Teacher, Student
 
 
 # Create your views here.
@@ -83,16 +84,18 @@ class CreateQuiz(View):
         auth_logout(request)
         return render(request, self.template)
 
-
     def post(self, request):
         form = CreateQuizForm(request.POST)
         if form.is_valid():
-            form.save()
+            quiz = form.save()
+            teacher = Teacher.objects.get(pk=request.session['username'])
+            quiz.teacher.add(teacher)
         return render(request, self.template, {'form':form})
 
 
 class AnswerQuiz(View):
     template = 'ansQuiz.html'
+
 
     def get(self, request):
         form = StudentAnswerForm()
@@ -103,7 +106,9 @@ class AnswerQuiz(View):
     def post(self,request):
         form = StudentAnswerForm(request.POST)
         if form.is_valid():
-            form.save()
+            answer = form.save()
+            student = Student.objects.get(pk=request.session['username'])
+            answer.student.add(student)
         return render(request, self.template, {'form':form})
 
 
