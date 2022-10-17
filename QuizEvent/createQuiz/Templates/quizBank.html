@@ -4,7 +4,37 @@
     <meta charset="UTF-8">
     <title>Quiz Bank</title>
 </head>
-<body style="background-color:grey;">
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+      background-color: #111;
+    }
+</style>
+<body style = "background-color:#1D2A35; color:White">
+    <ul>
+        <li><a href=" {% url 'createQuiz:main_menu' %} ">Menu</a></li>
+        <li><a href=" {% url 'createQuiz:add_quiz' %} ">Back</a></li>
+    </ul>
     Welcome to your Question Bank!
     <form action="" method="post">
         {% csrf_token %}
@@ -29,7 +59,7 @@
         </table>
                 {{form.as_p}}
     <input type = "submit" value = "Add Question">
-    <a href=" {% url 'createQuiz:add_quiz' %} ">Back</a>
+
     </form>
 </body>
 </html>

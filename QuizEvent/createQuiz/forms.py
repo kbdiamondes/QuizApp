@@ -61,9 +61,8 @@ class StudentAnswerForm(ModelForm):
         fields = ['questionid','studentanswer']
 
 
-
 class QuizResultForm(ModelForm):
-    quiz_id = forms.IntegerField(widget=forms.TextInput())
+    quiz_id = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
 
     class Meta:
         model = QuizResult

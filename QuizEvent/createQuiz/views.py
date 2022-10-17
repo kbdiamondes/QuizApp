@@ -5,11 +5,11 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
 from django.contrib.auth import logout as auth_logout
-
+from django_tables2 import tables
 
 from .forms import CreateQuizForm, StudentAnswerForm, QuizResultForm, QuizBankForm, StudentRegistration, \
     TeacherRegistration
-from .models import Quiz, User, Teacher, Student
+from .models import Quiz, User, Teacher, Student, StudentAnswer
 
 
 # Create your views here.
@@ -109,6 +109,7 @@ class AnswerQuiz(View):
             answer = form.save()
             student = Student.objects.get(pk=request.session['username'])
             answer.student.add(student)
+
         return render(request, self.template, {'form':form})
 
 
@@ -116,8 +117,25 @@ class QuizResult(View):
     template = 'quizResult.html'
 
     def get(self,request):
-        form = QuizResultForm
-        return render(request, self.template,{'form':form})
+        form = QuizResultForm()
+        quiz = Quiz.objects.all()
+        student = StudentAnswer.objects.only('student')
+
+        #uname = request.POST['username']
+
+        #studQuestionID = request.POST['questionid']
+        #studAnswerObj= Student.objects.get(pk=studQuestionID)
+
+        #quizQID = Quiz.objects.filter(quiz__questionid=studQuestionID)
+
+
+        #my idea is
+        #1. filter studentquestionid for current session username
+        #2. compare studentquestionid and quiz.questionid
+        #3. display
+
+
+        return render(request, self.template,{'student':student, 'quiz':quiz, 'form':form})
 
 
 class QuizBank(View):

@@ -4,30 +4,66 @@
     <meta charset="UTF-8">
     <title>Quiz Result</title>
 </head>
-<body style="background-color:grey;">
-    Quiz Result
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+      background-color: #111;
+    }
+</style>
+<body style = "background-color:#1D2A35; color:White">
+    <ul>
+    <li><a href = "{%url 'createQuiz:main_menu'%}">Menu</a></li>
+    <li><a href="{% url 'createQuiz:logout'%}">Sign out</a></li></ul>
+
+    <p><strong>Hi {{request.session.username}}!</strong><br>
+    This page shows you a collection of answers on quiz taken</p>
     <form action="" method="post">
         {% csrf_token %}
-        {{form.as_p}}
-    <input type="submit" value="View Results">
-
-    <table border="1" cellspacing="2">
-        <tr>
-            <th>Username</th>
+        <table cellspacing="2" border="1">
+            <th>Quiz ID</th>
+            <th>Question ID</th>
             <th>Subject Name</th>
+            <th>Question</th>
             <th>Correct Answer</th>
-            <th>Student Answer</th>
-            <th>Score</th>
-        </tr>
-
-        <tr>
-            <th>Subj 1</th>
-            <th>Correct Ans1</th>
-            <th>Studn Ans</th>
-            <th>Date of Event</th>
-            <th>25</th>
-        </tr>
-
+            <th>Student </th>
+        {% for q in quiz %}
+            {% for s in student%}
+            <tr>
+                <td>{{q.quizid}}</td>
+                <td>{{q.questionid}}</td>
+                <td>{{q.subjectname}}</td>
+                <td>{{q.question}}</td>
+                <td>{{q.correctanswer}}</td>
+                <td>{{s.student}}</td>
+            </tr>
+                {% endfor %}
+            {% endfor %}
+        </table>
+                {{form.as_p}}
+    <input type="submit" value="View Results">
+    </form>
     </table>
     </body>
+
+
 </html>
