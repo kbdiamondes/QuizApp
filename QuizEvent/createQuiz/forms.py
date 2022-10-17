@@ -38,6 +38,7 @@ class TeacherRegistration(ModelForm):
         model = Teacher
         fields = ['username', 'password', 'firstname', 'middlename', 'lastname', 'degree']
 
+
 class CreateQuizForm(ModelForm):
     subjectname = forms.CharField(widget=forms.TextInput())
     question = forms.CharField(widget=forms.TextInput())

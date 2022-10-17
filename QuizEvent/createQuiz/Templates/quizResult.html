@@ -45,22 +45,19 @@
             <th>Subject Name</th>
             <th>Question</th>
             <th>Correct Answer</th>
-            <th>Student </th>
+            <th>Student Answer</th>
         {% for q in quiz %}
-            {% for s in student%}
             <tr>
-                <td>{{q.quizid}}</td>
-                <td>{{q.questionid}}</td>
-                <td>{{q.subjectname}}</td>
-                <td>{{q.question}}</td>
-                <td>{{q.correctanswer}}</td>
-                <td>{{s.student}}</td>
+                <td>{{q.0}}</td>
+                <td>{{q.1}}</td>
+                <td>{{q.2}}</td>
+                <td>{{q.3}}</td>
+                <td>{{q.4}}</td>
+                <td>{{q.5}}</td>
             </tr>
-                {% endfor %}
             {% endfor %}
         </table>
-                {{form.as_p}}
-    <input type="submit" value="View Results">
+
     </form>
     </table>
     </body>

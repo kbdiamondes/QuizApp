@@ -1,11 +1,8 @@
-from multiprocessing import connection
-
-from django.contrib.auth.decorators import login_required
+from django.db import connection
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
 from django.contrib.auth import logout as auth_logout
-from django_tables2 import tables
 
 from .forms import CreateQuizForm, StudentAnswerForm, QuizResultForm, QuizBankForm, StudentRegistration, \
     TeacherRegistration
@@ -117,26 +114,11 @@ class QuizResult(View):
     template = 'quizResult.html'
 
     def get(self,request):
-        form = QuizResultForm()
-        quiz = Quiz.objects.all()
-        student = StudentAnswer.objects.only('student')
+        cursor = connection.cursor()
+        cursor.callproc('QuizEvent.displayQuizAnswers')
+        studAns = cursor.fetchall()
 
-        #uname = request.POST['username']
-
-        #studQuestionID = request.POST['questionid']
-        #studAnswerObj= Student.objects.get(pk=studQuestionID)
-
-        #quizQID = Quiz.objects.filter(quiz__questionid=studQuestionID)
-
-
-        #my idea is
-        #1. filter studentquestionid for current session username
-        #2. compare studentquestionid and quiz.questionid
-        #3. display
-
-
-        return render(request, self.template,{'student':student, 'quiz':quiz, 'form':form})
-
+        return render(request, self.template,{'quiz':studAns})
 
 class QuizBank(View):
     template = "quizBank.html"
