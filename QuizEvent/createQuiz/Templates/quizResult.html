@@ -69,6 +69,7 @@
             <th>Subject Name</th>
             <th>Question</th>
             <th>Correct Answer</th>
+            <th>Equivalent Score</th>
             <th>Student Answer</th>
         {% for q in quiz %}
             <tr>
@@ -78,6 +79,7 @@
                 <td>{{q.3}}</td>
                 <td>{{q.4}}</td>
                 <td>{{q.5}}</td>
+                <td>{{q.6}}</td>
             </tr>
             {% endfor %}
         </table>
