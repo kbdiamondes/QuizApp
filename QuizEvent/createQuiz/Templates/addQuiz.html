@@ -38,7 +38,6 @@
         <li><a href=" {% url 'createQuiz:quiz_bank' %} "> Import Question</a></li>
     </ul>
     <h3>Quiz Creation</h3>
-    Session Counter: {{request.session.visits}} <br>
     Hi <strong>{{request.session.username}}</strong>!<br>
     Type: <strong>{{request.session.type}} </strong><br>
     <form action="" method="post">

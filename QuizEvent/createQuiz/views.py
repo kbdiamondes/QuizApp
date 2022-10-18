@@ -152,3 +152,23 @@ class CloseQuiz(View):
     def get(self, request):
         auth_logout(request)
         return render(request, self.template)
+
+
+class EditQuestion(View):
+    template = 'EditQuestion.html'
+
+    def get(self, request):
+        form = CreateQuizForm()
+        quiz = Quiz.objects.all()
+        return render(request, self.template,{'quiz':quiz, 'form':form})
+
+    def editquiz(self, request,questionid):
+        displayquiz=Quiz.objects.get(questionid=questionid)
+        return render(request,"EditQuestion.html",{""})
+
+    def delete(request, questionid):
+        quiz = Quiz.objects.filter(questionid=questionid)
+        quiz.delete()
+        quiz = Quiz.objects.all()
+        #return redirect(reverse('createQuiz:main_menu'))
+        return render(request,"EditQuestion.html", {'quiz':quiz})

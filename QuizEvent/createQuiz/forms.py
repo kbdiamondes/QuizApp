@@ -42,14 +42,15 @@ class TeacherRegistration(ModelForm):
 class CreateQuizForm(ModelForm):
     subjectname = forms.CharField(widget=forms.TextInput())
     question = forms.CharField(widget=forms.TextInput())
-    questionid = forms.IntegerField(widget=forms.NumberInput())
+    quizid = forms.IntegerField(widget=forms.NumberInput())
+
     correctanswer = forms.CharField(widget=forms.TextInput())
     eqpoints = forms.IntegerField(widget=forms.NumberInput())
 
 
     class Meta:
         model = Quiz
-        fields = ['subjectname', 'questionid','question',  'correctanswer', 'eqpoints']
+        fields = ['quizid','subjectname','question',  'correctanswer', 'eqpoints']
 
 
 class StudentAnswerForm(ModelForm):

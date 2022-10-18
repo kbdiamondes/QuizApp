@@ -29,13 +29,23 @@
     li a:hover {
       background-color: #111;
     }
+
+    input[type=button], input[type=submit], input[type=reset] {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
 </style>
 <body style = "background-color:#1D2A35; color:White">
     <ul>
         <li><a href="{% url 'createQuiz:add_student' %}">Sign Up as Student</a></li>
         <li><a href="{% url 'createQuiz:add_teacher' %}">Sign Up as Teacher</a></li>
     </ul>
-    Session Counter: {{request.session.visits}}
+
         <form method="post">
             {% csrf_token %}
             <pre>

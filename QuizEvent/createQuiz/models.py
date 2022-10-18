@@ -28,8 +28,8 @@ class Teacher(User):
 
 
 class Quiz(models.Model):
-    questionid = models.IntegerField(null=False)
-    quizid = models.AutoField(primary_key=True)
+    questionid = models.AutoField(primary_key=True, null=False)
+    quizid = models.IntegerField(null=False)
     subjectname = models.CharField(max_length=50)
     question = models.CharField(max_length=50)
     correctanswer = models.CharField(max_length=50)
@@ -38,7 +38,7 @@ class Quiz(models.Model):
 
 
     def __str__(self):
-         return 'Quiz ID:' + str(self.quizid) + ' ' + 'Question ID:' + ' ' + str(self.questionid)  + '  ' + 'Subject Name: ' + self.subjectname + '  ' + 'Question: ' + self.question
+         return  'Question ID:' + ' ' + str(self.questionid)  + '  ' + 'Subject Name: ' + self.subjectname + '  ' + 'Question: ' + self.question
         #return 'Quiz ID:' + str(self.quizid) + ' ' + ' Question ID: ' + str(self.questionid)
 
 

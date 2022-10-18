@@ -47,6 +47,7 @@
   {%elif request.session.username != '' and request.session.type == 'T' %}
     <ul>
       <li><a href="{% url 'createQuiz:add_quiz' %}">Create New Quiz</a></li>
+      <li><a href="{% url 'createQuiz:edit_quiz' %}">Edit Quiz</a></li>
       <li><a href="{% url 'createQuiz:logout' %}">Log Off</a></li>
     </ul>
     Username:<strong>{{request.session.username}}</strong>  <br>
