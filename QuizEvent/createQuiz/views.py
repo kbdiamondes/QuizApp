@@ -134,6 +134,9 @@ class RecordScores(View):
 
     def post(self, request):
         form = RecordScoresForm(request.POST)
+        cursor = connection.cursor()
+        cursor.callproc('QuizEvent.DisplayAllAnswers')
+        studAns = cursor.fetchall()
         if form.is_valid():
             score = form.save()
         try:
@@ -141,7 +144,7 @@ class RecordScores(View):
             score.student.add(student)
         except Student.DoesNotExist:
             student = None
-        return render(request, self.template, {'form': form})
+        return render(request, self.template, {'quiz':studAns, 'form': form})
 
 
 class QuizBank(View):
