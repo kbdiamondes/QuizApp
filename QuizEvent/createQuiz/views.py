@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import logout as auth_logout
 
 from .forms import CreateQuizForm, StudentAnswerForm, QuizResultForm, QuizBankForm, StudentRegistration, \
-    TeacherRegistration
+    TeacherRegistration, RecordScoresForm
 from .models import Quiz, User, Teacher, Student, StudentAnswer
 
 
@@ -121,6 +121,28 @@ class QuizResult(View):
         studAns = cursor.fetchall()
 
         return render(request, self.template,{'quiz':studAns})
+
+
+class RecordScores(View):
+    template = 'RecordScores.html'
+    def get(self, request):
+        form = RecordScoresForm()
+        cursor = connection.cursor()
+        cursor.callproc('QuizEvent.DisplayAllAnswers')
+        studAns = cursor.fetchall()
+        return render(request, self.template,{'quiz':studAns,'form':form} )
+
+    def post(self, request):
+        form = RecordScoresForm(request.POST)
+        if form.is_valid():
+            score = form.save()
+        try:
+            student = Student.objects.get(pk=request.session['username'])
+            score.student.add(student)
+        except Student.DoesNotExist:
+            student = None
+        return render(request, self.template, {'form': form})
+
 
 class QuizBank(View):
     template = "quizBank.html"

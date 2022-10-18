@@ -85,7 +85,11 @@
           </tr>
         </table>
         <input type="submit" value="Update"/>
-
+            {% if messages %}
+            {% for updatequiz in messages%}
+            <h3 style="color: green;">{{updatequiz}}</h3>
+            {% endfor %}
+            {% endif %}
             </form>
   </body>
 </div>

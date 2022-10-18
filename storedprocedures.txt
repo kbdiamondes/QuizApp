@@ -9,3 +9,9 @@ AND createquiz_studentanswer_student.student_id = username
 
 //displayQuizBank
 SELECT createquiz_quiz.quizid, createquiz_quiz.questionid,createquiz_quiz.subjectname, createquiz_quiz.question, createquiz_quiz.correctanswer, createquiz_quiz.eqpoints FROM createquiz_quiz JOIN createquiz_studentanswer ON createquiz_quiz.questionid = createquiz_studentanswer.questionid_id
+
+//DisplayAllAnswers
+SELECT createquiz_quiz.quizid, createquiz_quiz.questionid,createquiz_quiz.subjectname, createquiz_quiz.question, createquiz_quiz.correctanswer, createquiz_quiz.eqpoints, createquiz_studentanswer.studentanswer, createquiz_studentanswer_student.student_id
+FROM createquiz_quiz
+JOIN createquiz_studentanswer ON createquiz_quiz.questionid = createquiz_studentanswer.questionid_id
+JOIN createquiz_studentanswer_student ON createquiz_studentanswer_student.id = createquiz_studentanswer.id

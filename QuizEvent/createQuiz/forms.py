@@ -64,11 +64,21 @@ class StudentAnswerForm(ModelForm):
 
 
 class QuizResultForm(ModelForm):
-    quiz_id = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('quizid'))
+    #question_id = forms.ModelChoiceField(widget=forms.Select(), queryset=StudentAnswer.objects.only('questionid'))
+    #studentscore = forms.IntegerField(widget=forms.TextInput())
 
     class Meta:
         model = QuizResult
-        fields = ['quiz_id']
+        fields = ['questionid']
+
+
+class RecordScoresForm(ModelForm):
+    questionid = forms.ModelChoiceField(widget=forms.Select(), queryset=Quiz.objects.only('questionid'))
+    studentscore = forms.IntegerField(widget=forms.TextInput())
+
+    class Meta:
+        model = QuizResult
+        fields = ['questionid','studentscore']
 
 
 class QuizBankForm(ModelForm):

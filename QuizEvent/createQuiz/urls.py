@@ -21,6 +21,7 @@ urlpatterns =[
     path('answerQuiz', views.AnswerQuiz.as_view(), name='ans_quiz'),
     path('quizResult', views.QuizResult.as_view(), name='quiz_result'),
     path('addFromQuizBank', views.QuizBank.as_view(), name='quiz_bank'),
+    path('RecordScores', views.RecordScores.as_view(), name='record_scores'),
 
 
 
