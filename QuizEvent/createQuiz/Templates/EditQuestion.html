@@ -66,7 +66,7 @@
         </ul>
 
     <form action="" method="post">
-     <h1>Edit Your Question</h1>
+     <h1>Edit Quiz Details</h1>
 
      <table border="1">
          <tr>
@@ -87,7 +87,7 @@
                             <td>{{e.correctanswer}}</td>
                             <td>{{e.eqpoints}}</td>
                             <td><a href="delete/{{ e.questionid }}">Delete</a></td>
-                            <td><a href="#">Edit</a></td>
+                            <td><a href="edit/{{e.questionid}}">Edit</a></td>
                  </tr>
                      {% endfor %}
                 </table>

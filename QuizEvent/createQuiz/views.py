@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.db import connection
 from django.shortcuts import render, redirect
 from django.views import View
@@ -165,12 +166,20 @@ class EditQuestion(View):
         quiz = Quiz.objects.all()
         return render(request, self.template,{'quiz':quiz, 'form':form})
 
-    def editquiz(self, request,questionid):
+    def editquiz(request,questionid):
         displayquiz=Quiz.objects.get(questionid=questionid)
-        return render(request,"EditQuestion.html",{""})
+        return render(request,"edit.html",{"Quiz":displayquiz})
 
     def delete(request, questionid):
         quiz = Quiz.objects.filter(questionid=questionid)
         quiz.delete()
         quiz = Quiz.objects.all()
         return render(request,"EditQuestion.html", {'quiz':quiz})
+
+    def updatequiz(request,questionid):
+        updatequiz=Quiz.objects.get(questionid=questionid)
+        form=CreateQuizForm(request.POST, instance=updatequiz)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Question Update Successfully...!")
+            return render(request,"edit.html",{"Quiz":updatequiz})
