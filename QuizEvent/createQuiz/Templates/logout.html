@@ -5,6 +5,9 @@
     <title>Logged Out</title>
 </head>
 <style>
+    .p2 {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+    }
     ul {
       list-style-type: none;
       margin: 0;
@@ -30,9 +33,11 @@
       background-color: #111;
     }
 </style>
-<body style = "background-color:#1D2A35; color:White">
-    <ul><li><a href="{% url 'createQuiz:login' %}">Login</a></li></ul>
-    <h3>You have successfully logged out!</h3>
+<div class="p2">
+    <body style = "background-color:#1D2A35; color:White">
+        <ul><li><a href="{% url 'createQuiz:login' %}">Login</a></li></ul>
+        <h3>You have successfully logged out!</h3>
 
-</body>
+    </body>
+</div>
 </html>

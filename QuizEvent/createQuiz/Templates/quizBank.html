@@ -5,6 +5,10 @@
     <title>Quiz Bank</title>
 </head>
 <style>
+    .p2 {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+    }
+
     ul {
       list-style-type: none;
       margin: 0;
@@ -53,37 +57,49 @@
       background-color: transparent;
       text-decoration: underline;
     }
+
+    input[type=button], input[type=submit], input[type=reset] {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
 </style>
-<body style = "background-color:#1D2A35; color:White">
-    <ul>
-        <li><a href=" {% url 'createQuiz:main_menu' %} ">Menu</a></li>
-        <li><a href=" {% url 'createQuiz:add_quiz' %} ">Back</a></li>
-    </ul>
-    Welcome to your Question Bank!
-    <form action="" method="post">
-        {% csrf_token %}
-        <table cellspacing="2" border="1">
-            <th>Question ID</th>
-            <th>Quiz ID</th>
-            <th>Subject Name</th>
-            <th>Question</th>
-            <th>Correct Answer</th>
-            <th>Points</th>
-        {% for e in quiz %}
-            <tr>
-                <td>{{e.questionid}}</td>
-                <td>{{e.quizid}}</td>
-                <td>{{e.subjectname}}</td>
-                <td>{{e.question}}</td>
-                <td>{{e.correctanswer}}</td>
-                <td>{{e.eqpoints}}</td>
+<div class="p2">
+    <body style = "background-color:#1D2A35; color:White">
+        <ul>
+            <li><a href=" {% url 'createQuiz:main_menu' %} ">Menu</a></li>
+            <li><a href=" {% url 'createQuiz:add_quiz' %} ">Back</a></li>
+        </ul>
+        <p>Welcome to your Question Bank <strong>{{request.session.type}}eacher {{request.session.username}}!</strong>   </strong></p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table cellspacing="2" border="1">
+                <th>Question ID</th>
+                <th>Quiz ID</th>
+                <th>Subject Name</th>
+                <th>Question</th>
+                <th>Correct Answer</th>
+                <th>Points</th>
+            {% for e in displayRecords %}
+                <tr>
+                    <td>{{e.0}}</td>
+                    <td>{{e.1}}</td>
+                    <td>{{e.2}}</td>
+                    <td>{{e.3}}</td>
+                    <td>{{e.4}}</td>
+                    <td>{{e.5}}</td>
 
-            </tr>
-        {% endfor %}
-        </table>
-                {{form.as_p}}
-    <input type = "submit" value = "Add Question">
+                </tr>
+            {% endfor %}
+            </table>
+                    {{form.as_p}}
+        <input type = "submit" value = "Add Question">
 
-    </form>
-</body>
+        </form>
+    </body>
+</div>
 </html>

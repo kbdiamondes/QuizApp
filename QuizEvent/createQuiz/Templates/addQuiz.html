@@ -5,6 +5,10 @@
     <title>Create Quiz</title>
 </head>
 <style>
+
+    .p2 {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+    }
     ul {
       list-style-type: none;
       margin: 0;
@@ -40,27 +44,30 @@
       cursor: pointer;
     }
 </style>
-<body style = "background-color:#1D2A35; color:White">
+<div class="p2">
+    <body style = "background-color:#1D2A35; color:White">
 
 
-    <ul>
-        <li><a href=" {% url 'createQuiz:main_menu' %} "> Menu</a></li>
-        <li><a href=" {% url 'createQuiz:quiz_bank' %} "> Import Question</a></li>
-        <li> <a href="{% url 'createQuiz:close_quiz' %}">Finish</a></li>
-    </ul>
-    <h3>Quiz Creation</h3>
-    Hi <strong>{{request.session.username}}</strong>!<br>
-    Type: <strong>{{request.session.type}} </strong><br>
-    <form action="" method="post">
+        <ul>
+            <li><a href=" {% url 'createQuiz:main_menu' %} "> Menu</a></li>
+            <li><a href=" {% url 'createQuiz:quiz_bank' %} "> Import Question</a></li>
+            <li> <a href="{% url 'createQuiz:close_quiz' %}">Finish</a></li>
+        </ul>
+        <h3>Quiz Creation</h3>
+      <p>
+        Welcome back {{request.session.type}}eacher,  <strong>{{request.session.username}}</strong>!  <br>
+      </p>
+        <form action="" method="post">
 
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Add Question">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Add Question">
 
 
 
 
-    </form>
+        </form>
 
-</body>
+    </body>
+</div>
 </html>

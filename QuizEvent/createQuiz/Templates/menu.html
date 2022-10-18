@@ -5,6 +5,9 @@
     <title>Welcome!</title>
 </head>
 <style>
+    .p2 {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+    }
     ul {
       list-style-type: none;
       margin: 0;
@@ -31,35 +34,39 @@
     }
 
 </style>
-<body style = "background-color:#1D2A35; color:White">
+<div class="p2">
+<main>
+  <body style = "background-color:#1D2A35; color:White">
 
 
-  {% if request.session.username != '' and request.session.type == 'S'%}
-  <nav>
-    <ul>
-          <li><a href="{% url 'createQuiz:ans_quiz' %}">Navigate Quiz</a></li>
-          <li><a href="{% url 'createQuiz:quiz_result' %}">Results</a></li>
-          <li><a href="{% url 'createQuiz:logout' %}">Log Off</a></li>
-    </ul>
-  </nav>
+    {% if request.session.username != '' and request.session.type == 'S'%}
+    <nav>
+      <ul>
+            <li><a href="{% url 'createQuiz:ans_quiz' %}">Navigate Quiz</a></li>
+            <li><a href="{% url 'createQuiz:quiz_result' %}">Results</a></li>
+            <li><a href="{% url 'createQuiz:logout' %}">Log Off</a></li>
+      </ul>
+    </nav>
 
+      <p>Quiz Portal Center</p>
+      <p>
+        Welcome back {{request.session.type}}tudent,  <strong>{{request.session.username}}</strong>!  <br>
+      </p>
+    {%elif request.session.username != '' and request.session.type == 'T' %}
+      <ul>
+        <li><a href="{% url 'createQuiz:add_quiz' %}">Create New Quiz</a></li>
+        <li><a href="{% url 'createQuiz:edit_quiz' %}">Edit Quiz</a></li>
+        <li><a href="{% url 'createQuiz:logout' %}">Log Off</a></li>
+      </ul>
+      <p>
+        Welcome back {{request.session.type}}eacher,  <strong>{{request.session.username}}</strong>!  <br>
+      </p>
+    {% else %}
+      <h3>Invalid Access!</h3>
+      <a href="{% url 'createQuiz:login' %}">Login</a>
+    {% endif %}
 
-    <p>Quiz Portal Center</p>
-    Session Counter: {{request.session.visits}}<br><br>
-    Username:<strong>{{request.session.username}}</strong>  <br>
-    Type: <strong>{{request.session.type}} </strong><br>
-  {%elif request.session.username != '' and request.session.type == 'T' %}
-    <ul>
-      <li><a href="{% url 'createQuiz:add_quiz' %}">Create New Quiz</a></li>
-      <li><a href="{% url 'createQuiz:edit_quiz' %}">Edit Quiz</a></li>
-      <li><a href="{% url 'createQuiz:logout' %}">Log Off</a></li>
-    </ul>
-    Username:<strong>{{request.session.username}}</strong>  <br>
-    Type: <strong>{{request.session.type}} </strong><br>
-  {% else %}
-    <h3>Invalid Access!</h3>
-    <a href="{% url 'createQuiz:login' %}">Login</a>
-  {% endif %}
-
-</body>
+  </body>
+  </main>
+</div>
 </html>

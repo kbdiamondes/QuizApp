@@ -116,7 +116,7 @@ class QuizResult(View):
 
     def get(self,request):
         cursor = connection.cursor()
-        cursor.callproc('QuizEvent.displayQuizAnswers')
+        cursor.callproc('QuizEvent.displayTakenQuizByStudent', [request.session['username']])
         studAns = cursor.fetchall()
 
         return render(request, self.template,{'quiz':studAns})
@@ -126,8 +126,10 @@ class QuizBank(View):
 
     def get(self, request):
         form = QuizBankForm
-        quiz = Quiz.objects.all()
-        return render(request, self.template, {'quiz':quiz,'form':form})
+        cursor = connection.cursor()
+        cursor.callproc('QuizEvent.displayQuizBank')
+        displayRecords = cursor.fetchall()
+        return render(request, self.template, {'displayRecords':displayRecords ,'form':form})
 
     def post(self, request):
         #form = QuizBankForm(request.POST)

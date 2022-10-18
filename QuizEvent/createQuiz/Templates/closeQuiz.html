@@ -5,6 +5,10 @@
     <title>Quiz Form Saved</title>
 </head>
 <style>
+    .p2 {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+    }
+
     ul {
       list-style-type: none;
       margin: 0;
@@ -40,12 +44,17 @@
       cursor: pointer;
     }
 </style>
-<body style = "background-color:#1D2A35; color:White">
-    <ul>
-        <li><a href=" {% url 'createQuiz:login' %} ">Login</a></li>
-        <li><a href="{% url 'createQuiz:add_student' %}">Sign Up as Student</a></li>
-        <li><a href="{% url 'createQuiz:add_teacher' %}">Sign Up as Teacher</a></li>
-    </ul>
-    <h3>Quiz Successfully saved!</h3>
-</body>
+<div class="p2">
+    <main>
+        <body style = "background-color:#1D2A35; color:White">
+            <ul>
+                <li><a href=" {% url 'createQuiz:login' %} ">Login</a></li>
+                <li><a href="{% url 'createQuiz:add_student' %}">Sign Up as Student</a></li>
+                <li><a href="{% url 'createQuiz:add_teacher' %}">Sign Up as Teacher</a></li>
+            </ul>
+
+            <h3>Quiz Successfully saved!</h3>
+        </body>
+    </main>
+</div>
 </html>

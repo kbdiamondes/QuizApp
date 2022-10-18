@@ -5,6 +5,9 @@
     <title>Sign in Page</title>
 </head>
 <style>
+    .p2 {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+    }
     ul {
       list-style-type: none;
       margin: 0;
@@ -40,25 +43,27 @@
       cursor: pointer;
     }
 </style>
-    <nav>
-        <ul>
-            <li><a href="{% url 'createQuiz:add_student' %}">Sign Up as Student</a></li>
-            <li><a href="{% url 'createQuiz:add_teacher' %}">Sign Up as Teacher</a></li>
-        </ul>
-    </nav>
-<body style = "background-color:#1D2A35; color:White">
+<div class="p2">
+        <nav>
+            <ul>
+                <li><a href="{% url 'createQuiz:add_student' %}">Sign Up as Student</a></li>
+                <li><a href="{% url 'createQuiz:add_teacher' %}">Sign Up as Teacher</a></li>
+            </ul>
+        </nav>
+    <body style = "background-color:#1D2A35; color:White">
 
 
-        <form method="post">
-            {% csrf_token %}
-            <pre>
-                Login
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
-                <input type="submit" value="login">
+            <form method="post">
+                {% csrf_token %}
+                <pre>
+                    Login
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="submit" value="login">
 
-            </pre>
-        </form>
+                </pre>
+            </form>
 
-</body>
+    </body>
+</div>
 </html>
