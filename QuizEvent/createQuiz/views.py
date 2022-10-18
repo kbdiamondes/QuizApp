@@ -102,12 +102,13 @@ class AnswerQuiz(View):
 
     def post(self,request):
         form = StudentAnswerForm(request.POST)
+        quiz = Quiz.objects.all()
         if form.is_valid():
             answer = form.save()
             student = Student.objects.get(pk=request.session['username'])
             answer.student.add(student)
 
-        return render(request, self.template, {'form':form})
+        return render(request, self.template, {'quiz':quiz,'form':form})
 
 
 class QuizResult(View):
@@ -170,5 +171,4 @@ class EditQuestion(View):
         quiz = Quiz.objects.filter(questionid=questionid)
         quiz.delete()
         quiz = Quiz.objects.all()
-        #return redirect(reverse('createQuiz:main_menu'))
         return render(request,"EditQuestion.html", {'quiz':quiz})

@@ -29,16 +29,20 @@
     li a:hover {
       background-color: #111;
     }
+
 </style>
 <body style = "background-color:#1D2A35; color:White">
 
 
   {% if request.session.username != '' and request.session.type == 'S'%}
+  <nav>
     <ul>
-      <li><a href="{% url 'createQuiz:ans_quiz' %}">Navigate Quiz</a></li>
-      <li><a href="{% url 'createQuiz:quiz_result' %}">Results</a></li>
-      <li><a href="{% url 'createQuiz:logout' %}">Log Off</a></li>
+          <li><a href="{% url 'createQuiz:ans_quiz' %}">Navigate Quiz</a></li>
+          <li><a href="{% url 'createQuiz:quiz_result' %}">Results</a></li>
+          <li><a href="{% url 'createQuiz:logout' %}">Log Off</a></li>
     </ul>
+  </nav>
+
 
     <p>Quiz Portal Center</p>
     Session Counter: {{request.session.visits}}<br><br>
